@@ -18,7 +18,7 @@ const NavBar = () => {
       </Link>
       <div>
       <i className="fa-solid fa-user-circle"></i>
-        <Link className="main-nav-item" to="/sign-in.html">
+        <Link className="main-nav-item" to="/Login">
           
           Sign In
         </Link>
