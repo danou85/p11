@@ -1,14 +1,15 @@
 import React from "react";
-import NavBar from "../composant/Navbar";
 import './pages.css'
+import NavBar from "../composant/Navbar";
+import SignIn from "../composant/signin";
 
 
-import FormLogin from "../composant/login";
+
 const Login = () => {
   return (
     <div>
-      <NavBar />
-      <FormLogin />
+     <NavBar/>
+    <SignIn/>
     </div>
   );
 };

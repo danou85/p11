@@ -8,7 +8,7 @@ import './main.css'; // Assurez-vous d'importer le fichier CSS si vous avez des 
 const NavBar = () => {
   return (
     <nav className="main-nav">
-      <Link className="main-nav-logo" to="/index.html">
+      <Link className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
           src={logo} // Utilisation de l'import pour la source de l'image
