@@ -10,6 +10,8 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Bouton de connexion cliqué");
+
     const url = "http://localhost:3001/api/v1/user/login";
 
     fetch(url, {
@@ -19,18 +21,24 @@ const SignIn = () => {
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Erreur du serveur : ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
+        console.log("Données de réponse analysées :", data);
         if (data.body && data.body.token) {
-          localStorage.token = data.body.token;
+          localStorage.setItem('token', data.body.token);
           navigate("/user");
         } else {
-          setError("Invalid email or password");
+          setError("Email ou mot de passe invalide");
         }
       })
       .catch((err) => {
-        console.error(err);
-        setError("Failed to connect to the server");
+        console.error("Erreur de fetch :", err);
+        setError("Échec de la connexion au serveur");
       });
   };
 

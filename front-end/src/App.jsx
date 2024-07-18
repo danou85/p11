@@ -2,9 +2,9 @@ import React from "react";
 // Importe BrowserRouter, Routes, et Route depuis 'react-router-dom'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./Pages/home";
+import Home from "./pages/home";
 
-import Login from "./Pages/connexion";
+import Login from "./pages/connexion";
 const App = () => {
   return (
     <BrowserRouter>

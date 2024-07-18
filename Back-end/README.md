@@ -17,8 +17,7 @@ Please make sure you have the right versions and download both packages. You can
 # Check Node.js version
 node --version
 
-# Check Mongo versioncd ..
-
+# Check Mongo version
 mongo --version
 ```
 
