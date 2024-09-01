@@ -3,8 +3,7 @@ import Footer from "../composant/footer.jsx"; // Importez le composant Footer de
 import Account from "../composant/accounts.jsx"; // Importez le composant Account depuis le chemin spécifié
 import Navbar from "../composant/Navbar.jsx"; // Importez le composant Navbar depuis le chemin spécifié
 import "./user.jsx"; // Importez la feuille de style 'User.js' (bien que cela semble inutilisé)
-import WelcomeBack from "../composant/welcomeback.jsx"; // Importez le composant WelcomeBack depuis le chemin spécifié
-
+import WelcomeBack from "../composant/reconnexion.jsx";
 import { setUser } from "../store/user.jsx"; // Importez la fonction 'setUser' depuis le magasin 'user.js'
 import { useDispatch } from "react-redux"; // Importez le crochet 'useDispatch' depuis le module 'react-redux'
 

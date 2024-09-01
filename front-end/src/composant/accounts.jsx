@@ -10,14 +10,19 @@ const Account = ({ transaction }) => {
 
   return (
     <section className="account">
+      {/* Conteneur pour le contenu du compte */}
       <div className="account-content-wrapper">
+        {/* Titre du compte */}
         <h3 className="account-title">
           {transaction.title} ({transaction.accountNumber})
         </h3>
+        {/* Montant du compte */}
         <p className="account-amount">${transaction.amount}</p>
+        {/* Description du montant du compte */}
         <p className="account-amount-description">{transaction.description}</p>
+        {/* Affichage conditionnel des détails de la transaction */}
         {isOpen && (
-          <div>
+          <div className="transaction-details">
             <p>Transaction: {transaction.type}</p>
             <p>Catégorie: {transaction.category}</p>
             <p>Note: {transaction.note}</p>
@@ -25,8 +30,14 @@ const Account = ({ transaction }) => {
           </div>
         )}
       </div>
+
+      {/* Conteneur pour le bouton d'action */}
       <div className="account-content-wrapper cta">
-        <button className="transaction-button" onClick={() => setIsOpen(!isOpen)}>
+        {/* Bouton pour afficher ou masquer les détails de la transaction */}
+        <button
+          className="transaction-button"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? "Hide transactions" : "View transactions"}
         </button>
       </div>
