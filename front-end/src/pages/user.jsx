@@ -6,6 +6,7 @@ import Navbar from "../composant/Navbar.jsx";
 import WelcomeBack from "../composant/reconnexion.jsx";
 import { setUser } from "../store/user.jsx";
 import { useDispatch } from "react-redux";
+import "./pages.css";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -71,12 +72,14 @@ const User = () => {
     <div>
       <Logo/>
       <Navbar />
+      <div className="user">
       <WelcomeBack/>
       <main className="main bg-dark page-user">
         {transactions.map((transaction) => (
           <Account key={transaction.id} transaction={transaction} />
         ))}
       </main>
+      </div>
       <Footer />
     </div>
   );
