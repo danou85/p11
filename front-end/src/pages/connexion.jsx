@@ -8,12 +8,12 @@ import Footer from "../composant/footer";
 
 const Login = () => {
   return (
-    <div>
-      <header>
+    <div className="test">
+      <header >
       <Logo/>
      <NavBar/>
      </header>
-     <main>
+     <main className=" main-connexion">
      <SignIn/>
      </main>
     <Footer/>

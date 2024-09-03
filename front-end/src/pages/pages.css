@@ -5,3 +5,13 @@
 .user{
     background-color: #12002b;
 }
+
+.test{
+    display: flex;
+    flex-direction: column; /* Organise les enfants en colonne */
+}
+.main-connexion{
+    background-color: #12002b;
+   flex:1;
+}
+
