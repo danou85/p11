@@ -7,11 +7,21 @@
 }
 
 .test{
-    display: flex;
-    flex-direction: column; /* Organise les enfants en colonne */
+   height: 100%;
 }
 .main-connexion{
     background-color: #12002b;
    flex:1;
 }
+
+
+body{
+    height: 100%;
+    min-height: 100%;
+}
+
+#root{
+    height: 100%;
+}
+
 
