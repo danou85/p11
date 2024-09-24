@@ -60,8 +60,8 @@ paths:
           description: "Erreur serveur interne."
 
     put:
-      summary: "Modifier les informations d'une transaction"
-      description: "Modifie les détails d'une transaction spécifique pour l'utilisateur authentifié."
+      summary: "Modifier, ajouter ou supprimer des informations d'une transaction"
+      description: "Permet de modifier, ajouter ou supprimer des informations spécifiques dans une transaction pour l'utilisateur authentifié."
       parameters:
         - name: transactionId
           in: path
@@ -70,10 +70,29 @@ paths:
           description: "L'ID de la transaction à modifier."
         - in: body
           name: transaction
-          description: "Les nouvelles informations de la transaction."
+          description: "Les nouvelles informations de la transaction, les champs fournis seront modifiés, ajoutés ou supprimés si précisé."
           required: true
           schema:
-            $ref: '#/definitions/Transaction'
+            type: object
+            properties:
+              operation:
+                type: string
+                enum: [modify, add, delete]
+                description: "Indique si l'opération est une modification, un ajout ou une suppression de champ."
+              fields:
+                type: object
+                description: "Les champs à modifier, ajouter ou supprimer de la transaction."
+                properties:
+                  description:
+                    type: string
+                  amount:
+                    type: number
+                    format: float
+                  category:
+                    type: string
+                  date:
+                    type: string
+                    format: date
       responses:
         '200':
           description: "Transaction mise à jour avec succès."
@@ -86,25 +105,7 @@ paths:
         '500':
           description: "Erreur serveur interne."
 
-    delete:
-      summary: "Supprimer certaines informations d'une transaction"
-      description: "Supprime des informations sur une transaction spécifique, sans supprimer la transaction en elle-même."
-      parameters:
-        - name: transactionId
-          in: path
-          required: true
-          type: string
-          description: "L'ID de la transaction dont certaines informations doivent être supprimées."
-      responses:
-        '200':
-          description: "Informations supprimées avec succès."
-        '404':
-          description: "Transaction non trouvée."
-        '401':
-          description: "Non autorisé. L'utilisateur doit être authentifié."
-        '500':
-          description: "Erreur serveur interne."
-
+  
 definitions:
   Transaction:
     type: object
