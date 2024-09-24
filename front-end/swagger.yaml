@@ -1,136 +1,125 @@
 swagger: "2.0"
 info:
-  title: ArgentBank Transactions API
-  description: API pour gérer les transactions des utilisateurs
-  version: 1.0.0
-servers:
-  - url: https://api.argentbank.com/v1
+  version: "1.0.0"
+  title: "ArgentBank Transactions API"
+  description: "API permettant aux utilisateurs de gérer et de visualiser leurs transactions."
 
 paths:
   /transactions:
     get:
-      summary: Récupérer les transactions groupées par compte pour le mois en cours
-      description: Retourne toutes les transactions du mois courant, regroupées par compte pour l'utilisateur authentifié.
+      summary: "Récupérer les transactions du mois en cours groupées par compte"
+      description: "Cet endpoint retourne les transactions de l'utilisateur authentifié pour le mois en cours, groupées par compte."
       parameters:
         - name: userId
           in: query
           required: true
-          schema:
-            type: string
-          description: ID de l'utilisateur
+          type: string
+          description: "L'ID de l'utilisateur pour lequel les transactions doivent être récupérées."
       responses:
         '200':
-          description: Transactions récupérées avec succès
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  accounts:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        accountId:
-                          type: string
-                        transactions:
-                          type: array
-                          items:
-                            $ref: '#/components/schemas/Transaction'
+          description: "Transactions récupérées avec succès"
+          schema:
+            type: object
+            properties:
+              accounts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    transactions:
+                      type: array
+                      items:
+                        $ref: '#/definitions/Transaction'
         '401':
-          description: Non autorisé, l'utilisateur doit être authentifié
+          description: "Non autorisé. L'utilisateur doit être authentifié."
         '500':
-          description: Erreur serveur interne
+          description: "Erreur serveur interne."
 
   /transactions/{transactionId}:
     get:
-      summary: Récupérer les détails d'une transaction
-      description: Retourne les détails d'une transaction spécifique.
+      summary: "Récupérer les détails d'une transaction"
+      description: "Retourne les détails d'une transaction spécifique pour l'utilisateur authentifié."
       parameters:
         - name: transactionId
           in: path
           required: true
-          schema:
-            type: string
-          description: ID de la transaction
+          type: string
+          description: "L'ID de la transaction à récupérer."
       responses:
         '200':
-          description: Détails de la transaction récupérés avec succès
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Transaction'
+          description: "Détails de la transaction récupérés avec succès"
+          schema:
+            $ref: '#/definitions/Transaction'
         '404':
-          description: Transaction non trouvée
+          description: "Transaction non trouvée."
         '401':
-          description: Non autorisé, l'utilisateur doit être authentifié
+          description: "Non autorisé. L'utilisateur doit être authentifié."
         '500':
-          description: Erreur serveur interne
+          description: "Erreur serveur interne."
 
-  /transactions/{transactionId}:
     put:
-      summary: Mettre à jour les informations d'une transaction
-      description: Permet de modifier les informations d'une transaction spécifique.
+      summary: "Modifier les informations d'une transaction"
+      description: "Modifie les détails d'une transaction spécifique pour l'utilisateur authentifié."
       parameters:
         - name: transactionId
           in: path
           required: true
+          type: string
+          description: "L'ID de la transaction à modifier."
+        - in: body
+          name: transaction
+          description: "Les nouvelles informations de la transaction."
+          required: true
           schema:
-            type: string
-          description: ID de la transaction
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Transaction'
+            $ref: '#/definitions/Transaction'
       responses:
         '200':
-          description: Transaction mise à jour avec succès
+          description: "Transaction mise à jour avec succès."
         '400':
-          description: Données invalides
+          description: "Requête invalide, données incorrectes."
         '404':
-          description: Transaction non trouvée
+          description: "Transaction non trouvée."
         '401':
-          description: Non autorisé, l'utilisateur doit être authentifié
+          description: "Non autorisé. L'utilisateur doit être authentifié."
         '500':
-          description: Erreur serveur interne
+          description: "Erreur serveur interne."
 
-  /transactions/{transactionId}:
     delete:
-      summary: Supprimer des informations sur une transaction
-      description: Supprime certaines informations d'une transaction, mais pas la transaction elle-même.
+      summary: "Supprimer certaines informations d'une transaction"
+      description: "Supprime des informations sur une transaction spécifique, sans supprimer la transaction en elle-même."
       parameters:
         - name: transactionId
           in: path
           required: true
-          schema:
-            type: string
-          description: ID de la transaction
+          type: string
+          description: "L'ID de la transaction dont certaines informations doivent être supprimées."
       responses:
         '200':
-          description: Informations supprimées avec succès
+          description: "Informations supprimées avec succès."
         '404':
-          description: Transaction non trouvée
+          description: "Transaction non trouvée."
         '401':
-          description: Non autorisé, l'utilisateur doit être authentifié
+          description: "Non autorisé. L'utilisateur doit être authentifié."
         '500':
-          description: Erreur serveur interne
+          description: "Erreur serveur interne."
 
-components:
-  schemas:
-    Transaction:
-      type: object
-      properties:
-        transactionId:
-          type: string
-        amount:
-          type: number
-          format: float
-        date:
-          type: string
-          format: date
-        description:
-          type: string
-        accountId:
-          type: string
+definitions:
+  Transaction:
+    type: object
+    properties:
+      transactionId:
+        type: string
+      accountId:
+        type: string
+      amount:
+        type: number
+        format: float
+      date:
+        type: string
+        format: date
+      description:
+        type: string
+      category:
+        type: string

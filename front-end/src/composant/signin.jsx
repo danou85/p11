@@ -33,7 +33,7 @@ const SignIn = () => {
       .then((res) => {
         // Vérifie si la réponse n'est pas OK (statut HTTP 200-299)
         if (!res.ok) {
-          // Traite l'erreur côté serveur et lève une exception
+          // Traite l'erreur côté serveur 
           return res.json().then((errorData) => {
             throw new Error(`Erreur du serveur : ${res.status}, ${errorData.message || 'Erreur inconnue'}`);
           });
